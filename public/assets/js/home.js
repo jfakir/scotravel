@@ -818,6 +818,40 @@ $(document).ready(function () {
 
             }
     });
+
+$(document).ready(function () {
+    $('#flight_travelers_id').on('change', function () {
+        let selected = $(this).val(); 
+        let container = $('#confirmation_fields');
+        container.empty();
+
+        console.log("Selected travelers:", selected);
+        console.log("All travelers:", travelers);
+
+        if (selected && selected.length > 0) {
+            selected.forEach(function (id) {
+                let traveler = travelers.find(t => String(t.user_id) === String(id));
+                console.log("Matched traveler:", traveler);
+                if (traveler) {
+                    container.append(`
+                        <div class="row mb-2 traveler-confirmation" data-user="${traveler.user_id}">
+                            <label class="col-sm-2 col-form-label">
+                                Confirmation for ${traveler.fname} ${traveler.lname}<i class="text-danger">*</i>
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" 
+                                    name="confirmation[${traveler.user_id}]" 
+                                    class="form-control" 
+                                    value="">
+                            </div>
+                        </div>
+                    `);
+                }
+            });
+        }
+    });
+});
+
     // Flight form end
 
     // layover form start
@@ -1091,13 +1125,17 @@ $(document).ready(function () {
                 $('.loader').removeClass('displayNone');
             },
             success: function (response) {
-                if(response['status']){
+                if (response['status']) {
                     $("#planTravelersModal_travelersContainer").html('');
                     var array = response['data'];
-                    for(var i=0; i<array.length; i++){   
+                    for (var i = 0; i < array.length; i++) {
+                        let confirmation = array[i]['confirmationNumber'] ? " - " + array[i]['confirmationNumber'] : "";
                         $("#planTravelersModal_travelersContainer").append(`
-                            <p class="d-flex align-items-center m-0"><i class="bi bi-person me-2" style="font-size: 22px"></i>${array[i]['fname']} ${array[i]['lname']}</p>
-                        `);
+                <p class="d-flex align-items-center m-0">
+                    <i class="bi bi-person me-2" style="font-size: 22px"></i>
+                    ${array[i]['fname']} ${array[i]['lname']}${confirmation}
+                </p>
+            `);
                     }
                     $('#planTravelersModal').modal('show');
                 }
@@ -1384,7 +1422,7 @@ $(document).ready(function () {
             });
         }
     });
-
+    // end for plan attachments
 
 
     //users form start
@@ -2441,6 +2479,12 @@ $(document).ready(function () {
     /**
      END DOCUMENT READY
      */
+
+
+
+
+
+
 });
 
 function convertTo12HourFormat(time24h) {

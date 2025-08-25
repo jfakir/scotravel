@@ -9,6 +9,8 @@ use App\Models\AirlinesModel;
 use App\Models\AirportsModel;
 use App\Models\PlanAttachmentsModel;
 use App\Models\PlansUsersModal;
+use App\Models\UserConfirmationsModel;
+
 
 class PlanModel extends Model
 {
@@ -43,6 +45,7 @@ class PlanModel extends Model
             $airlinesModel = new AirlinesModel();
             $planAttachmentsModel = new PlanAttachmentsModel();
             $plansUsersModal = new PlansUsersModal();
+            $userConfirmations=new UserConfirmationsModel();
 
             // return $this->select('plans.*, cities.city as destination_city, COUNT(plan_attachments.id) as numberOfAttachments,COUNT(plans_users.user_id) as numberOfUsers')
             //             ->join('cities', 'cities.id = plans.city_id', 'left')
@@ -60,6 +63,7 @@ class PlanModel extends Model
             ->join('cities', 'cities.id = plans.city_id', 'left')
             ->join('plan_attachments', 'plan_attachments.plan_id = plans.id AND plan_attachments.is_deleted = 0', 'left')
             ->join('plans_users', 'plans_users.plan_id = plans.id', 'left')
+            ->join('user_confirmations','user_confirmations.planId=plans.id','left')
             ->where('plans.trip_id', $tripId)
             ->where('plans.is_deleted', 0)
             ->groupBy('plans.id')
@@ -99,5 +103,16 @@ class PlanModel extends Model
     //     $this->update($id, $data);
     //     return true;
     // }
+
+
+    public function getPlanUsersWithConfirmations($planId){
+        return $this->db->table('plans_users')
+            ->select('plans_users.*, users.fname, users.lname, user_confirmations.confirmationNumber')
+            ->join('users', 'users.id = plans_users.user_id')
+            ->join('user_confirmations', 'user_confirmations.userId = plans_users.user_id AND user_confirmations.planId = plans_users.plan_id', 'left')
+            ->where('plans_users.plan_id', $planId)
+            ->get()
+            ->getResult();
+    }
 
 }

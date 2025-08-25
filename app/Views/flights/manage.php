@@ -123,12 +123,32 @@
                             <input type="hidden" name="airline_name" id="airline_name" value="<?=$airline_name?>">
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <!-- <div class="row mb-3">
                         <label for="confirmation" class="col-sm-2 col-form-label">Confirmation<i class="text-danger">*</i></label>
                         <div class="col-sm-10">
                             <input type="text" name="confirmation" id="confirmation" class="form-control" value="<?=$confirmation?>">
                         </div>
+                    </div> -->
+                    <div class="row mb-3" id="confirmation_fields">
+                        <?php if(isset($planUsers)): ?>
+                            <?php foreach($planUsers as $user): ?>
+                                <div class="row mb-2 traveler-confirmation" data-user="<?=$user->user_id?>">
+                                    <label class="col-sm-2 col-form-label">
+                                        Confirmation for <?=$user->fname?> <?=$user->lname?><i class="text-danger">*</i>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" 
+                                            id="confirmation"
+                                            name="confirmation[<?=$user->user_id?>]" 
+                                            class="form-control" 
+                                            value="<?=$user->confirmationNumber ?? ''?>"
+>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
+
                     <!-- <div class="row mb-3">
                         <div class="col-12">
                             <p class="m-0 fw-bold">Seat(s)</p>
@@ -448,12 +468,34 @@
                             <input type="hidden" name="airline_name" id="airline_name" value="">
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <!-- <div class="row mb-3">
                         <label for="confirmation" class="col-sm-2 col-form-label">Confirmation<i class="text-danger">*</i></label>
                         <div class="col-sm-10">
                             <input type="text" name="confirmation" id="confirmation" class="form-control">
                         </div>
-                    </div>
+                    </div> -->
+                <div class="row mb-3" id="confirmation_fields">
+                    <?php if(isset($planUsers)): ?>
+                        <?php foreach($planUsers as $user): ?>
+                            <div class="row mb-2 traveler-confirmation" data-user="<?=$user->user_id?>">
+                                <label class="col-sm-2 col-form-label">
+                                    Confirmation for <?=$user->fname?> <?=$user->lname?><i class="text-danger">*</i>
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" 
+                                        name="confirmation[<?=$user->user_id?>]" 
+                                        class="form-control" 
+                                        value="<?=$user->confirmation ?? ''?>">
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+               <script>
+                    let travelers = <?= json_encode($travelers) ?>;
+               </script>
+
+
                     <!-- <div class="row mb-3">
                         <div class="col-12">
                             <p class="m-0 fw-bold">Seat(s)</p>

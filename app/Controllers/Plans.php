@@ -7,108 +7,230 @@ use App\Models\AirlinesModel;
 use App\Models\PlanModel;
 use App\Models\PlansUsersModal;
 use App\Models\PlanAttachmentsModel;
+use App\Models\UserConfirmationsModel;
 
 class Plans extends BaseController
 {
    
-    public function save()
-    {
-        if ($this->request->isAJAX()) {
-            $plansUsersModal = new PlansUsersModal();
-            $PlanModel = new PlanModel();
+    // public function save()
+    // {
+    //     if ($this->request->isAJAX()) {
+    //         $plansUsersModal = new PlansUsersModal();
+    //         $PlanModel = new PlanModel();
         
-            $postData = $this->request->getPost();
+    //         $postData = $this->request->getPost();
             
-            $trip_id = $postData['trip_id'];
+    //         $trip_id = $postData['trip_id'];
 
-            if(isset($postData['starting_date']) && !empty($postData['starting_date'])){
-                $startingDate = new \DateTime($postData['starting_date']);
-                $postData['starting_date'] = $startingDate->format('Y-m-d');
-            }
+    //         if(isset($postData['starting_date']) && !empty($postData['starting_date'])){
+    //             $startingDate = new \DateTime($postData['starting_date']);
+    //             $postData['starting_date'] = $startingDate->format('Y-m-d');
+    //         }
 
-            if(isset($postData['ending_date']) && !empty($postData['ending_date'])){
-                $endingDate = new \DateTime($postData['ending_date']);
-                $postData['ending_date'] = $endingDate->format('Y-m-d');
-            }else{
-                $postData['ending_date'] = NULL;
-            }
+    //         if(isset($postData['ending_date']) && !empty($postData['ending_date'])){
+    //             $endingDate = new \DateTime($postData['ending_date']);
+    //             $postData['ending_date'] = $endingDate->format('Y-m-d');
+    //         }else{
+    //             $postData['ending_date'] = NULL;
+    //         }
             
-            // Convert starting_time and ending_time to 24-hour format
-            if(isset($postData['starting_time']) && !empty($postData['starting_time'])){
-                $startingTime = new \DateTime($postData['starting_time']);
-                $postData['starting_time'] = $startingTime->format('H:i');
-            }else{
-                $postData['starting_time'] = NULL;
-            }
+    //         // Convert starting_time and ending_time to 24-hour format
+    //         if(isset($postData['starting_time']) && !empty($postData['starting_time'])){
+    //             $startingTime = new \DateTime($postData['starting_time']);
+    //             $postData['starting_time'] = $startingTime->format('H:i');
+    //         }else{
+    //             $postData['starting_time'] = NULL;
+    //         }
             
-            if(isset($postData['ending_time']) && !empty($postData['ending_time'])){
-                $endingTime = new \DateTime($postData['ending_time']);
-                $postData['ending_time'] = $endingTime->format('H:i');
-            }else{
-                $postData['ending_time'] = NULL;
-            }
+    //         if(isset($postData['ending_time']) && !empty($postData['ending_time'])){
+    //             $endingTime = new \DateTime($postData['ending_time']);
+    //             $postData['ending_time'] = $endingTime->format('H:i');
+    //         }else{
+    //             $postData['ending_time'] = NULL;
+    //         }
             
             
 
-            if(isset($postData['id']) && !empty($postData['id'])){
+    //         if(isset($postData['id']) && !empty($postData['id'])){
 
-                $planId = $PlanModel->update($postData['id'],$postData);
+    //             $planId = $PlanModel->update($postData['id'],$postData);
 
-                $plansUsersModal->where('plan_id', $postData['id'])->delete();
+    //             $plansUsersModal->where('plan_id', $postData['id'])->delete();
 
-                if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
-                    $travelers_id = $postData['travelers_id'];
-                    foreach ($travelers_id as $travelerId) {
-                            $data = [
-                                'plan_id' => $postData['id'] ,
-                                'user_id' => $travelerId
-                            ];
+    //             if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
+    //                 $travelers_id = $postData['travelers_id'];
+    //                 foreach ($travelers_id as $travelerId) {
+    //                         $data = [
+    //                             'plan_id' => $postData['id'] ,
+    //                             'user_id' => $travelerId
+    //                         ];
                     
-                        $plansUsersModal->insert($data);
-                    }
-                }
-            }else{
+    //                     $plansUsersModal->insert($data);
+    //                 }
+    //             }
+    //         }else{
 
-                $planId = $PlanModel->insert($postData);
+    //             $planId = $PlanModel->insert($postData);
 
-                if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
-                        $travelers_id = $postData['travelers_id'];
-                        foreach ($travelers_id as $travelerId) {
-                            $data = [
-                                'plan_id' => $planId ,
-                                'user_id' => $travelerId
-                            ];
+    //             if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
+    //                     $travelers_id = $postData['travelers_id'];
+    //                     foreach ($travelers_id as $travelerId) {
+    //                         $data = [
+    //                             'plan_id' => $planId ,
+    //                             'user_id' => $travelerId
+    //                         ];
                     
-                        $plansUsersModal->insert($data);
-                    }
-                }
+    //                     $plansUsersModal->insert($data);
+    //                 }
+    //             }
             
-            }
+    //         }
 
-            if ($planId) {
-                return $this->response->setJSON([
-                    'status' => true,
-                    'trip_id' => base64_encode($trip_id)
-                ]);
-            } else {
-                return $this->response->setJSON([
-                    'status' => false,
-                ]);
+    //         if ($planId) {
+    //             return $this->response->setJSON([
+    //                 'status' => true,
+    //                 'trip_id' => base64_encode($trip_id)
+    //             ]);
+    //         } else {
+    //             return $this->response->setJSON([
+    //                 'status' => false,
+    //             ]);
+    //         }
+            
+    //         // $users = $obj['planUsers'];
+    //         // foreach ($users as $user) {
+    //         //         $data = [
+    //         //             'plan_id' => $planId ,
+    //         //             'user_id' => $user['user_id']
+    //         //         ];
+            
+    //         //         $plansUsersModal->insert($data);
+    //         // }
+
+        
+    //     }
+    // }
+
+    public function save()
+{
+    if ($this->request->isAJAX()) {
+        $plansUsersModal = new PlansUsersModal();
+        $PlanModel = new PlanModel();
+        $userConfirmationsModel = new UserConfirmationsModel();
+
+        $postData = $this->request->getPost();
+        $trip_id = $postData['trip_id'];
+
+        // Date/time formatting (kept as-is)
+        if(isset($postData['starting_date']) && !empty($postData['starting_date'])){
+            $startingDate = new \DateTime($postData['starting_date']);
+            $postData['starting_date'] = $startingDate->format('Y-m-d');
+        }
+        if(isset($postData['ending_date']) && !empty($postData['ending_date'])){
+            $endingDate = new \DateTime($postData['ending_date']);
+            $postData['ending_date'] = $endingDate->format('Y-m-d');
+        } else {
+            $postData['ending_date'] = NULL;
+        }
+        if(isset($postData['starting_time']) && !empty($postData['starting_time'])){
+            $startingTime = new \DateTime($postData['starting_time']);
+            $postData['starting_time'] = $startingTime->format('H:i');
+        } else {
+            $postData['starting_time'] = NULL;
+        }
+        if(isset($postData['ending_time']) && !empty($postData['ending_time'])){
+            $endingTime = new \DateTime($postData['ending_time']);
+            $postData['ending_time'] = $endingTime->format('H:i');
+        } else {
+            $postData['ending_time'] = NULL;
+        }
+
+        // PLAN UPDATE / INSERT
+        if(isset($postData['id']) && !empty($postData['id'])){
+            $planId = $postData['id'];
+
+            $PlanModel->update($planId,$postData);
+
+            // reset plan users
+            $plansUsersModal->where('plan_id', $planId)->delete();
+            if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
+                foreach ($postData['travelers_id'] as $travelerId) {
+                    $plansUsersModal->insert([
+                        'plan_id' => $planId ,
+                        'user_id' => $travelerId
+                    ]);
+                }
             }
-            
-            // $users = $obj['planUsers'];
-            // foreach ($users as $user) {
-            //         $data = [
-            //             'plan_id' => $planId ,
-            //             'user_id' => $user['user_id']
-            //         ];
-            
-            //         $plansUsersModal->insert($data);
+        } else {
+            $planId = $PlanModel->insert($postData);
+
+            if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
+                foreach ($postData['travelers_id'] as $travelerId) {
+                    $plansUsersModal->insert([
+                        'plan_id' => $planId ,
+                        'user_id' => $travelerId
+                    ]);
+                }
+            }
+        }
+
+        // CONFIRMATIONS LOGIC
+        if (isset($postData['confirmation']) && !empty($postData['confirmation'])) {
+            $confirmations = $postData['confirmation']; // [userId => confirmationNumber]
+
+            //  save all confirmations into plans.confirmation column (JSON encoded)
+            $PlanModel->update($planId, [
+                'confirmation' => json_encode($confirmations)
+            ]);
+
+            //  save each user’s confirmation
+            // foreach ($confirmations as $userId => $confirmationNumber) {
+            //     if (!empty($confirmationNumber)) {
+            //         $userConfirmationsModel->save([
+            //             'planId'             => $planId,
+            //             'userId'             => $userId,
+            //             'confirmationNumber' => $confirmationNumber
+            //         ]);
+            //     }
             // }
 
-        
+            foreach ($confirmations as $userId => $confirmationNumber) {
+                if (!empty($confirmationNumber)) {
+                    $existing = $userConfirmationsModel
+                        ->where('planId', $planId)
+                        ->where('userId', $userId)
+                        ->first();
+
+                    if ($existing) {
+                        // update existing row
+                        $userConfirmationsModel->update($existing['id'], [
+                            'confirmationNumber' => $confirmationNumber
+                        ]);
+                    } else {
+                        // insert new row
+                        $userConfirmationsModel->insert([
+                            'planId' => $planId,
+                            'userId' => $userId,
+                            'confirmationNumber' => $confirmationNumber
+                        ]);
+                    }
+                }
+            }
+
+        }
+
+        // RESPONSE
+        if ($planId) {
+            return $this->response->setJSON([
+                'status' => true,
+                'trip_id' => base64_encode($trip_id)
+            ]);
+        } else {
+            return $this->response->setJSON(['status' => false]);
         }
     }
+}
+
 
     public function edit()
     {

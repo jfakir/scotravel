@@ -12,5 +12,4 @@ class UserConfirmationsModel extends Model
     // public $timestamps = false;
 
 
-
 }

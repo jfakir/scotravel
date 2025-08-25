@@ -371,6 +371,7 @@ class Trip extends BaseController
             $users = $tripsUsersModal->getTripUsersOnlyTravelers($trip_id);
             $attachments = $tripAttachmentsModel->getTripAttchments($trip_id);
             $costs = $tripsModal->getTripCosts($trip_id);
+            $planUsers = $PlanModel->getPlanUsersWithConfirmations($trip_id);
 
 
             //getTripOrganizers query from tripsUsersModal
@@ -392,6 +393,7 @@ class Trip extends BaseController
             $data['attachments'] = $attachments;
             $data['costs'] = $costs;
             $data['isTripAdmin'] = $isTripAdmin;
+            $data['planUsers'] = $planUsers;
                 
             $trip_data = [
                 'trip_users' => $users,
