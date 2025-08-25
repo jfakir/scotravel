@@ -33,7 +33,7 @@
                                     <option value="<?=$traveler['user_id']?>"
                                         <?php
                                             foreach ($planUsers as $user) {
-                                                if ($user['user_id'] == $traveler['user_id']) {
+                                                if ($user->user_id == $traveler['user_id']) {
                                                     echo "selected";
                                                 }
                                             }
