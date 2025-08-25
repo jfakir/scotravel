@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700,600');
+
+* {
+    font-family: 'Exo', 'Titillium Web';
+}
+
+:root {
+    scroll-behavior: smooth;
+    --blue: #076DB5;
+    --darkBlue: #012970;
+    --lightBlue: #dae9f8;
+    --red: #dc3545;
+    --darkRed: #6b0101;
+    --lightRed: #FFE5E5;
+    --orange: #ffb300;
+    --darkOrange: #765300;
+    --lightOrange: #f8f8e0;
+    --purple: #800080;
+    --darkPurple: #470147;
+    --lightPurple: #e4c4f0;
+    --violet: #4154f1;
+    --darkViolet: #20297b;
+    --lightViolet: #d1d4f1;
+    --lime: #2eca6a;
+    --darkLime: #186536;
+    --lightLime: #e0f8e9;
+    --lightGrey: #dfe3e7;
+    --petrole: #2c384e;
+    --carbon: #444444;
+    --lightCarbon: #919191;
+    --white: #FFF;
+}
+
+a:not(.text-danger) {
+    color: var(--darkBlue) !important;
+    text-decoration: none !important;
+    transition: 0.5s;
+}
+
+a:not(.text-danger):not(:has(> i)):hover {
+    color: var(--blue) !important;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--darkBlue) !important;
+}
+
+p {
+    color: var(--darkBlue) !important;
+}
+
+ul,
+li {
+    color: var(--darkBlue);
+    list-style: none;
+}
+
+.location {
+    cursor: pointer;
+    color: var(--lime) !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.passwordToggle {
+    cursor: pointer !important;
+}
+
+.displayNone {
+    display: none !important;
+}
+
+.pageTitle {
+    border-bottom: solid 2px var(--darkBlue);
+    margin-bottom: 10px;
+    font-weight: bold !important;
+}
+
+.error-message-container {
+    display: none;
+}
+
+body{
+    height: 100%;
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+    /* Horizontally center */
+    align-items: center;
+    /* Vertically center */
+    /* Full height of viewport */
+    overflow: auto;
+    /* Add scrollbar if content overflows */
+}
+
+/*--------------------------------------------------------------
+  # Logo
+  --------------------------------------------------------------*/
+.logo {
+    width: 250px;
+    height: auto;
+}
+
+/*--------------------------------------------------------------
+  # Phone Input
+  --------------------------------------------------------------*/
+.iti {
+    display: block !important;
+}
+
+/*--------------------------------------------------------------
+  # Error Message
+  --------------------------------------------------------------*/
+.error-message {
+    font-size: 13px;
+}
+
+/*--------------------------------------------------------------
+  # Footer
+  --------------------------------------------------------------*/
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+/*--------------------------------------------------------------
+  # Colors
+  --------------------------------------------------------------*/
+.white {
+    color: var(--white) !important;
+}
+
+.blue {
+    color: var(--blue) !important;
+}
+
+.lime {
+    color: var(--lime) !important;
+}
+
+.red {
+    color: var(--red);
+}
+
+/*--------------------------------------------------------------
+  # Loader
+  --------------------------------------------------------------*/
+.loader {
+    background-color: var(--white);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    display: flex;
+}
+
+
+.loader .spinner-border {
+    width: 100px;
+    height: 100px;
+    color: var(--darkBlue);
+    z-index: 9999;
+}
+
+/*--------------------------------------------------------------
+  # Select Picker Design
+  --------------------------------------------------------------*/
+.select2-selection {
+    cursor: pointer;
+    height: 38px !important;
+    border-radius: 0.25rem !important;
+    border: solid 1px var(--lightGrey) !important;
+    border-radius: 7px !important;
+}
+
+.select2-dropdown {
+    margin-top: -5px !important;
+    border-color: var(--lightGrey) !important;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: var(--blue) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 37px !important;
+}
+
+.select2-search__field {
+    cursor: pointer !important;
+    height: 100% !important;
+}
+
+.select2-search__field::-webkit-input-placeholder,
+.select2-search__field::placeholder {
+    font-family: unset !important;
+    color: #444;
+    opacity: 1;
+}
+
+.select2-selection__choice {
+    margin-bottom: 5px !important;
+}
+
+/*--------------------------------------------------------------
+  # Bootstrap Overrwie
+  --------------------------------------------------------------*/
+.btn {
+    border: 0 !important;
+}
+
+.btn-primary {
+    background-color: var(--blue) !important;
+    transition: 0.5s;
+}
+
+.btn-primary:hover {
+    transition: 0.5s;
+    background-color: var(--darkBlue) !important;
+}
+
+.bg-primary {
+    background-color: var(--blue) !important;
+}
+
+.form-control,
+.input-group-text {
+    border-color: #B9B9B9 !important;
+}
+
+.form-control::placeholder {
+    color: #CCC !important;
+}
+
+/*--------------------------------------------------------------
+  # Cards
+  --------------------------------------------------------------*/
+.card {
+    box-shadow: 0px 0 20px rgba(1, 41, 112, 0.2);
+    z-index: 2;
+}
+
+.card-title {
+    font-weight: 600 !important;
+    color: var(--darkBlue);
+}
+
+.card-title span {
+    color: var(--lightCarbon);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.card h6 {
+    font-size: 28px;
+    color: var(--darkBlue);
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+/*--------------------------------------------------------------
+  # Alert
+  --------------------------------------------------------------*/
+.session-alert {
+    width: 33% !important;
+    text-align: center !important;
+    position: absolute !important;
+    top: 10px !important;
+    left: 33.3% !important;
+    z-index: 9999;
+}
+
+.session-alert.alert-danger p {
+    color: var(--red) !important;
+}
+
+/*--------------------------------------------------------------
+  # Error 404
+  --------------------------------------------------------------*/
+.error-404 {
+    padding: 30px;
+}
+
+.error-404 h1 {
+    font-size: 180px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 0;
+    line-height: 150px;
+}
+
+.error-404 h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--darkBlue);
+    margin-bottom: 30px;
+}
+
+.error-404 .btn {
+    background: var(--petrole);
+    color: var(--white);
+    padding: 8px 30px;
+}
+
+.error-404 .btn:hover {
+    background: var(--petrole);
+}
+
+@media (min-width: 992px) {
+    .error-404 img {
+        max-width: 50%;
+    }
+}

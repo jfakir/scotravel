@@ -1,0 +1,1195 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700,600');
+
+* {
+    font-family: 'Exo', 'Titillium Web';
+}
+
+:root {
+    scroll-behavior: smooth;
+    --blue: #076DB5;
+    --darkBlue: #012970;
+    --lightBlue: #dae9f8;
+    --red: #dc3545;
+    --darkRed: #6b0101;
+    --lightRed: #FFE5E5;
+    --orange: #ffb300;
+    --darkOrange: #765300;
+    --lightOrange: #f8f8e0;
+    --purple: #800080;
+    --darkPurple: #470147;
+    --lightPurple: #e4c4f0;
+    --violet: #4154f1;
+    --darkViolet: #20297b;
+    --lightViolet: #d1d4f1;
+    --lime: #2eca6a;
+    --darkLime: #186536;
+    --lightLime: #e0f8e9;
+    --lightGrey: #dfe3e7;
+    --petrole: #2c384e;
+    --carbon: #444444;
+    --lightCarbon: #919191;
+    --white: #FFF;
+}
+
+a:not(.text-danger) {
+    color: var(--darkBlue) !important;
+    text-decoration: none !important;
+    transition: 0.5s;
+}
+
+a:not(.text-danger):not(:has(> i)):hover {
+    color: var(--blue) !important;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--darkBlue) !important;
+}
+
+p {
+    color: var(--darkBlue) !important;
+}
+
+ul,
+li {
+    color: var(--darkBlue);
+    list-style: none;
+}
+
+.location {
+    cursor: pointer;
+    color: var(--lime) !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.passwordToggle {
+    cursor: pointer !important;
+}
+
+.displayNone {
+    display: none !important;
+}
+
+.pageTitle {
+    border-bottom: solid 2px var(--darkBlue);
+    margin-bottom: 10px;
+    font-weight: bold !important;
+}
+
+.error-message-container {
+    /* display: none; */
+}
+
+/*--------------------------------------------------------------
+  # Error Message
+  --------------------------------------------------------------*/
+.error-message {
+    font-size: 13px;
+}
+
+/*--------------------------------------------------------------
+  # Colors
+  --------------------------------------------------------------*/
+.white {
+    color: var(--white) !important;
+}
+
+.blue {
+    color: var(--blue) !important;
+}
+
+.lime {
+    color: var(--lime) !important;
+}
+
+.red {
+    color: var(--red);
+}
+
+/*--------------------------------------------------------------
+  # Loader
+  --------------------------------------------------------------*/
+.loader {
+    background-color: var(--white);
+	/* background-color: rgba(0, 0, 0, 0.2); */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+}
+
+.loader .spinner-border {
+    width: 100px;
+    height: 100px;
+    color: var(--darkBlue);
+    z-index: 9999;
+}
+
+/*--------------------------------------------------------------
+  # Select Picker Design
+  --------------------------------------------------------------*/
+.select2-selection {
+    cursor: pointer;
+    min-height: 38px !important;
+    border-radius: 0.25rem !important;
+    border: solid 1px #B9B9B9 !important;
+    border-radius: 7px !important;
+    padding-left: 7px !important;
+}
+
+.select2-dropdown {
+    margin-top: -5px !important;
+    border-color: #B9B9B9 !important;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: var(--blue) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 37px !important;
+    padding: 0 !important;
+}
+.select2-container--default .select2-search--inline .select2-search__field{
+    height: 31px !important;
+}
+
+/* .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    line-height: 38px !important;
+    padding: 0 !important;
+} */
+
+.select2-search__field {
+    cursor: pointer !important;
+    /* height: 100% !important; */
+    /* padding-left: 7px !important; */
+    width: 100%;
+
+}
+
+.select2-search__field::-webkit-input-placeholder,
+.select2-search__field::placeholder {
+    font-family: unset !important;
+    color: #444;
+    opacity: 1;
+    transition: none !important; /* Ensure no transition */
+    width: 100%;
+
+}
+
+.select2-selection__choice {
+    margin-bottom: 5px !important;
+}
+
+.select2-container--default .select2-selection--multiple{
+    padding: 0px !important;
+}
+
+.select2-selection__arrow {
+    vertical-align: middle; /* Adjust as needed */
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 100% !important;
+}
+
+/* .select2-search {
+    padding-left: 2px;
+} */
+
+/*--------------------------------------------------------------
+  # Bootstrap Overrwie
+  --------------------------------------------------------------*/
+.btn {
+    border: 0 !important;
+}
+
+.btn-primary {
+    background-color: var(--blue) !important;
+    transition: 0.5s;
+}
+
+.btn-primary:hover {
+    transition: 0.5s;
+    background-color: var(--darkBlue) !important;
+}
+
+.bg-primary {
+    background-color: var(--blue) !important;
+}
+
+.form-control,
+.input-group-text {
+    border-color: #B9B9B9 !important;
+}
+
+.form-control::placeholder {
+    color: #CCC !important;
+}
+
+/*--------------------------------------------------------------
+  # Header
+  --------------------------------------------------------------*/
+.logocontainer {
+    height: auto;
+    width: 80px;
+}
+
+.logo {
+    height: auto;
+    width: 160px;
+}
+
+.logo span {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--darkBlue);
+    font-family: "Nunito", sans-serif;
+}
+
+header {
+    transition: all 0.5s;
+    height: 60px;
+    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    background-color: var(--white);
+    padding-left: 20px;
+}
+
+header .toggle-sidebar-btn {
+    font-size: 32px;
+    cursor: pointer;
+    color: var(--darkBlue);
+}
+
+/*--------------------------------------------------------------
+  # CAROUSEL
+  --------------------------------------------------------------*/
+.carousel-inner .overlay {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    width: 400px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.75);
+    /* White background with 0.5 opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-inner .carousel-content {
+    text-align: center;
+}
+
+.carousel-inner img {
+    height: 500px !important;
+}
+
+#filter_wraper {
+    background-color: white;
+    padding: 10px 20px;
+    /* Adjust padding as needed */
+    margin-top: 20px;
+    /* Adjust margin-top to take space from the carousel */
+    position: relative;
+    top: -75px;
+    z-index: 1;
+    /* Ensure filter wrapper is above the carousel */
+}
+
+#tripFilter_button {
+    font-size: 25px !important;
+}
+
+#tripClearFilter_button {
+    font-size: 25px !important;
+}
+
+/*--------------------------------------------------------------
+  # Main
+  --------------------------------------------------------------*/
+#main {
+    margin-top: 80px;
+    padding: 0px 30px;
+    transition: 0.2s;
+    flex :1;
+}
+
+@media (max-width: 1199px) {
+    #main {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    #main,
+    #footer {
+        margin-left: 300px;
+    }
+}
+
+/*--------------------------------------------------------------
+  # Cards
+  --------------------------------------------------------------*/
+.card {
+    box-shadow: 0px 0 20px rgba(1, 41, 112, 0.2);
+}
+
+.card-title {
+    font-weight: 600 !important;
+    color: var(--darkBlue);
+}
+
+.card-title span {
+    color: var(--lightCarbon);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.card h6 {
+    font-size: 28px;
+    color: var(--darkBlue);
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+/*--------------------------------------------------------------
+  # Alert
+  --------------------------------------------------------------*/
+.session-alert {
+    width: 33% !important;
+    text-align: center !important;
+    position: absolute !important;
+    top: 10px !important;
+    left: 33.3% !important;
+    z-index: 9999;
+}
+
+.session-alert.alert-danger p {
+    color: var(--red) !important;
+}
+
+@media (max-width: 1280px) {
+    .session-alert {
+        width: 55% !important;
+    }
+}
+
+/*--------------------------------------------------------------
+  # Sidebar
+  --------------------------------------------------------------*/
+.sidebar {
+    position: fixed;
+    background-color: var(--white);
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: 996;
+    transition: all 0.3s;
+    padding: 10px;
+    overflow-y: auto;
+    box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+}
+
+@media (max-width: 1199px) {
+    .sidebar {
+        left: -300px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .toggle-sidebar .sidebar {
+        left: 0;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .toggle-sidebar #main,
+    .toggle-sidebar #footer {
+        margin-left: 0;
+    }
+
+    .toggle-sidebar .sidebar {
+        left: -300px;
+    }
+}
+
+.sidebar ul {
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav .nav-item {
+    margin-bottom: 7px;
+}
+
+.sidebar-nav .nav-link {
+    /* If the navlink is openned it will apply this style*/
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--blue);
+    transition: 0.3;
+    background: var(--lightBlue);
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+.sidebar-nav .nav-link i {
+    font-size: 16px;
+    margin-right: 10px;
+    color: var(--darkBlue) !important;
+}
+
+.sidebar-nav .nav-link.collapsed {
+    /* If the navlink is closed it will apply this style*/
+    color: var(--darkBlue);
+    background: var(--white);
+}
+
+.sidebar-nav .nav-link.collapsed i {
+    color: var(--darkBlue);
+}
+
+.sidebar-nav .nav-link:hover {
+    color: var(--blue);
+    background: var(--lightBlue);
+}
+
+.sidebar-nav .nav-link:hover i {
+    color: var(--blue);
+}
+
+.sidebar-nav .nav-link .bi-chevron-down {
+    margin-right: 0;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sidebar-nav .nav-link:not(.collapsed) .bi-chevron-down {
+    transform: rotate(180deg);
+}
+
+.sidebar-nav .nav-content {
+    padding: 5px 0 0 0;
+    margin: 0;
+    list-style: none;
+}
+
+.sidebar-nav .nav-content a {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--darkBlue);
+    transition: 0.3;
+    padding: 10px 0 10px 40px;
+    transition: 0.3s;
+}
+
+.sidebar-nav .nav-content a i {
+    font-size: 6px;
+    margin-right: 8px;
+    line-height: 0;
+    border-radius: 50%;
+}
+
+.sidebar-nav .nav-content a:hover,
+.sidebar-nav .nav-content a.active {
+    color: var(--blue);
+}
+
+.sidebar-nav .nav-content a.active i {
+    background-color: var(--blue);
+}
+
+
+
+.sidebar-icon {
+    z-index: 999;
+    position: absolute;
+    top: 50%;
+    right: 1.5px;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: #fff;
+}
+
+.sidebar-icon-div{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    top: 40%;
+    right: -15px;
+    width: 14px;
+  background: var(--blue) !important;;
+  height: 60px;
+}
+
+#sidebar{
+    overflow: visible;
+}
+/*--------------------------------------------------------------
+  # Navbare
+  --------------------------------------------------------------*/
+.header-nav ul {
+    list-style: none;
+}
+
+.header-nav>ul {
+    margin: 0;
+    padding: 0;
+}
+
+.header-nav .nav-icon {
+    font-size: 22px;
+    color: var(--darkBlue);
+    margin-right: 25px;
+    position: relative;
+}
+
+.header-nav .nav-profile {
+    color: var(--darkBlue);
+}
+
+.header-nav .nav-profile img {
+    max-height: 36px;
+}
+
+.header-nav .nav-profile span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.header-nav .badge-number {
+    position: absolute;
+    inset: -2px -5px auto auto;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+.header-nav .notifications {
+    inset: 8px -15px auto auto !important;
+}
+
+.header-nav .notifications .notification-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    transition: 0.3s;
+}
+
+.header-nav .notifications .notification-item i {
+    margin: 0 20px 0 10px;
+    font-size: 24px;
+}
+
+.header-nav .notifications .notification-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.header-nav .notifications .notification-item p {
+    font-size: 13px;
+    margin-bottom: 3px;
+    color: var(--lightCarbon);
+}
+
+.header-nav .notifications .notification-item:hover {
+    background-color: var(--lightBlue);
+}
+
+.header-nav .messages {
+    inset: 8px -15px auto auto !important;
+}
+
+.header-nav .messages .message-item {
+    padding: 15px 10px;
+    transition: 0.3s;
+}
+
+.header-nav .messages .message-item a {
+    display: flex;
+}
+
+.header-nav .messages .message-item img {
+    margin: 0 20px 0 10px;
+    max-height: 40px;
+}
+
+.header-nav .messages .message-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--carbon);
+}
+
+.header-nav .messages .message-item p {
+    font-size: 13px;
+    margin-bottom: 3px;
+    color: var(--lightCarbon);
+}
+
+.header-nav .messages .message-item:hover {
+    background-color: var(--lightBlue);
+}
+
+.header-nav .profile {
+    min-width: 240px;
+    padding-bottom: 0;
+    top: 8px !important;
+}
+
+.header-nav .profile .dropdown-header h6 {
+    font-size: 18px;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: var(--carbon);
+}
+
+.header-nav .profile .dropdown-header span {
+    font-size: 14px;
+}
+
+.header-nav .profile .dropdown-item {
+    font-size: 14px;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+
+.header-nav .profile .dropdown-item i {
+    margin-right: 10px;
+    font-size: 18px;
+    line-height: 0;
+}
+
+.header-nav .profile .dropdown-item:hover {
+    background-color: var(--lightBlue);
+}
+
+/*--------------------------------------------------------------
+  # Swiper
+  --------------------------------------------------------------*/
+.swiper {
+    width: 100%;
+    height: 100%;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+.swiper-slide {
+    background-color: var(--white) !important;
+}
+
+.swiper-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: 0px !important;
+}
+
+#tripDashboard_swiper {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+.quickReport_swiper .card-icon {
+    font-size: 32px;
+    line-height: 0;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.quickReport_swiper .blue-card .card-icon {
+    color: var(--blue);
+    background: var(--lightBlue);
+}
+
+.quickReport_swiper .green-card .card-icon {
+    color: var(--lime);
+    background: var(--lightLime);
+}
+
+.quickReport_swiper .customers-card .card-icon {
+    color: var(--orange);
+    background: var(--lightOrange);
+}
+
+.quickReport_swiper .red-card .card-icon {
+    color: var(--red);
+    background-color: var(--lightRed);
+}
+
+.quickReport_swiper .purple-card .card-icon {
+    color: var(--purple);
+    background-color: #F0E6F4;
+}
+
+/*--------------------------------------------------------------
+  # Data table
+  --------------------------------------------------------------*/
+td .bi {
+    font-size: 20px !important;
+}
+
+thead tr {
+    background-color: var(--blue) !important;
+    color: var(--white) !important;
+}
+
+.datatable {
+    padding-top: 15px !important;
+}
+
+.datatable tbody tr:nth-child(even) {
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    /* Add a bottom border */
+}
+
+/* Gray background for odd rows with border */
+.datatable tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+    /* Add a bottom border */
+}
+
+/*--------------------------------------------------------------
+  # Error 404
+  --------------------------------------------------------------*/
+.error-404 {
+    padding: 30px;
+}
+
+.error-404 h1 {
+    font-size: 180px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 0;
+    line-height: 150px;
+}
+
+.error-404 h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--darkBlue);
+    margin-bottom: 30px;
+}
+
+.error-404 .btn {
+    background: var(--petrole);
+    color: var(--white);
+    padding: 8px 30px;
+}
+
+.error-404 .btn:hover {
+    background: var(--petrole);
+}
+
+@media (min-width: 992px) {
+    .error-404 img {
+        max-width: 50%;
+    }
+}
+
+/*--------------------------------------------------------------
+  # Footer
+  --------------------------------------------------------------*/
+footer {
+    background-color: var(--white);
+    color: var(--darkBlue);
+    width: 100%;
+    text-align: center;
+    padding: 15px 0px;
+    z-index: 995;
+
+    flex-shrink: 0; /* Ensure the footer does not shrink */
+ 
+}
+/* Wrapper to contain the main and footer */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content should take all available space except for the footer */
+
+
+/* Footer styles */
+
+
+/*--------------------------------------------------------------
+  # PROFILE
+  --------------------------------------------------------------*/
+.nav-tabs-bordered {
+    border-bottom: 2px solid #ebeef4 !important;
+}
+
+.nav-tabs-bordered .nav-link {
+    margin-bottom: -2px !important;
+    border: none !important;
+    color: var(--petrole) !important;
+}
+
+.nav-tabs-bordered .nav-link:hover,
+.nav-tabs-bordered .nav-link:focus {
+    color: var(--darkBlue) !important;
+}
+
+.nav-tabs-bordered .nav-link.active {
+    background-color: var(--white) !important;
+    color: var(--darkBlue) !important;
+    border-bottom: 2px solid var(--darkBlue) !important;
+}
+
+/*--------------------------------------------------------------
+  # NOTIFICATION
+  --------------------------------------------------------------*/
+.unredeemedNotification {
+    margin-left: 5px;
+    font-size: 10px;
+    text-align: start;
+}
+
+#notification_list a {
+    cursor: pointer;
+}
+
+/*--------------------------------------------------------------
+  # UPCOMING / PAST TRIPS
+  --------------------------------------------------------------*/
+
+  
+  .trip-banner-container .card img {
+    width: 350px;  /* Fixed width */
+    height: 100%;  /* Take full height of the grid area */
+    object-fit: cover;  /* Crop to cover the grid area */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+
+.avatar_container .avatar-group .avatar {
+    width: 30px !important;
+    height: 30px !important;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-right: -8px;
+    border-radius: 50%;
+    border: solid 1px var(--white);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.avatar_container .avatar-group .avatar:hover {
+    transform: scale(1.2);
+}
+
+/*--------------------------------------------------------------
+  # TRIP PAGE
+  --------------------------------------------------------------*/
+#selectPlans_modal .plan {
+    width: 100%;
+    font-weight: bold;
+    color: var(--white) !important;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: 0.5s;
+}
+
+#selectPlans_modal .flight_plan {
+    background-color: var(--blue);
+}
+
+#selectPlans_modal .flight_plan:hover {
+    background-color: var(--darkBlue);
+    transition: 0.5s;
+}
+
+#selectPlans_modal .lodging_plan {
+    background-color: var(--lime);
+}
+
+#selectPlans_modal .lodging_plan:hover {
+    background-color: var(--darkLime);
+    transition: 0.5s;
+}
+
+
+#selectPlans_modal .carRenting_plan {
+    background-color: var(--purple);
+}
+
+#selectPlans_modal .carRenting_plan:hover {
+    background-color: var(--darkPurple);
+    transition: 0.5s;
+}
+
+#selectPlans_modal .restaurant_plan {
+    background-color: var(--red);
+}
+
+#selectPlans_modal .restaurant_plan:hover {
+    background-color: var(--darkRed);
+    transition: 0.5s;
+}
+
+#selectPlans_modal .activity_plan {
+    background-color: var(--orange);
+    transition: 0.5s;
+}
+
+#selectPlans_modal .activity_plan:hover {
+    background-color: var(--darkOrange);
+    transition: 0.5s;
+}
+
+#selectPlans_modal .transportation_plan {
+    background-color: var(--violet);
+    transition: 0.5s;
+}
+
+#selectPlans_modal .transportation_plan:hover {
+    background-color: var(--darkViolet);
+    transition: 0.5s;
+}
+
+#timeline_container .plans {
+    position: relative !important;
+}
+
+/* #timeline_container .plans::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    border-left: 2px dashed #CCC;
+    height: 100%;
+    z-index: -1 !important;
+} */
+
+
+#timeline_container .date_separator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--blue);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#timeline_container .date_separator:hover {
+    background-color: var(--darkBlue);
+    transition: 0.5s;
+}
+
+#timeline_container .date_separator p,
+#timeline_container .date_separator i {
+    color: var(--white) !important;
+    font-weight: bold;
+}
+
+#timeline_container .icon_container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50% !important;
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+#timeline_container .plan {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* Center items vertically */
+}
+
+#timeline_container .plan>.info {
+    width: 100%;
+}
+
+#timeline_container .plan>.info>p {
+    margin: 0 !important;
+}
+
+#timeline_container .info .title {
+    margin: 0 !important;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+/* #timeline_container .info .title:hover {
+    color: var(--blue) !important;
+    transition: 0.5s;
+} */
+
+#timeline_container .activity_plan .icon_container {
+    color: var(--orange);
+    background: var(--lightOrange);
+}
+
+#timeline_container .lodging_plan .icon_container {
+    color: var(--lime);
+    background: var(--lightLime);
+}
+
+#timeline_container .carRenting_plan .icon_container {
+    color: var(--purple);
+    background-color: var(--lightPurple);
+}
+
+#timeline_container .flight_plan .icon_container {
+    color: var(--blue);
+    background: var(--lightBlue);
+}
+
+#timeline_container .restaurant_plan .icon_container {
+    color: var(--red);
+    background-color: var(--lightRed);
+}
+
+#timeline_container .transportation_plan .icon_container {
+    color: var(--violet);
+    background-color: var(--lightViolet);
+}
+
+#timeline_container .bi-pen-fill {
+    color: var(--lime) !important;
+    font-size: 18px;
+}
+
+#timeline_container .bi-trash3-fill {
+    color: var(--red) !important;
+    font-size: 18px;
+}
+
+#tripNotes_container {
+    height: 100vh !important;
+    overflow-y: scroll !important;
+}
+
+/*--------------------------------------------------------------
+  # PLAN DETAILS
+  --------------------------------------------------------------*/
+.plan_detail_container .accessIcons {
+    font-size: 30px;
+}
+
+.secondary_details {
+    padding: 0px 10px;
+    border-left: dashed 2px #CCC;
+}
+
+#flight_detail_container .details_container {
+    padding-left: 5px;
+}
+
+#flight_detail_container .details_container::before {
+    content: "";
+    position: absolute;
+    left: 10.5px;
+    top: 65px;
+    height: 117px;
+    padding-top: 5px;
+    width: 2px;
+    border-left: solid 2px var(--red);
+}
+
+#flight_detail_container .departure-circle-icon {
+    position: absolute;
+    top: 65px;
+    left: 11px;
+    transform: translate(-50%, -50%);
+    background-color: var(--red);
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+#flight_detail_container .arrival-circle-icon {
+    position: absolute;
+    top: 176px;
+    left: 4px;
+    color: var(--red);
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.planTravelersDiv{
+    background-color: #f2eded;
+  border-radius: 30px;
+  width: 100px;
+}
+
+.planTravelersText{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+#users_datatable_length , #users_datatable_info ,#tenants_datatable_length, #tenants_datatable_info, #tripFiles_datatable_length, #tripFiles_datatable_info{
+    display: none !important;
+}
+
+#users_datatable_wrapper,#tenants_datatable_wrapper {
+    margin-top: -52px !important;
+    /* z-index: -100 !important; */
+}
+
+#tripFiles_datatable_wrapper {
+    margin-top: -45px !important;
+}
+
+.editUserIcon,.editTenantIcon{
+    font-size: 19px;
+    color:var(--blue) !important;
+}
+
+.editPlanIcon{
+    font-size: 17px;
+}
+
+.middlePlanLine::after {
+    content: '';
+    position: absolute;
+    right: -5px; /* Adjust the position of the arrow */
+    top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-left-color: #CCC; /* Match the line color */
+}
+
