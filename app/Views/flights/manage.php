@@ -123,26 +123,26 @@
                             <input type="hidden" name="airline_name" id="airline_name" value="<?=$airline_name?>">
                         </div>
                     </div>
-                    <!-- <div class="row mb-3">
+                    <div class="row mb-3">
                         <label for="confirmation" class="col-sm-2 col-form-label">Confirmation<i class="text-danger">*</i></label>
                         <div class="col-sm-10">
                             <input type="text" name="confirmation" id="confirmation" class="form-control" value="<?=$confirmation?>">
                         </div>
-                    </div> -->
+                    </div>
                     <div class="row mb-3" id="confirmation_fields">
                         <?php if(isset($planUsers)): ?>
                             <?php foreach($planUsers as $user): ?>
                                 <div class="row mb-2 traveler-confirmation" data-user="<?=$user->user_id?>">
                                     <label class="col-sm-2 col-form-label">
-                                        Confirmation for <?=$user->fname?> <?=$user->lname?><i class="text-danger">*</i>
+                                        Confirmation for <br> <?=$user->fname?> <?=$user->lname?><i class="text-danger">*</i>
                                     </label>
                                     <div class="col-sm-10">
                                         <input type="text" 
-                                            id="confirmation"
-                                            name="confirmation[<?=$user->user_id?>]" 
-                                            class="form-control" 
+                                            id="confirmation_fields<?=$user->user_id?>"
+                                            name="confirmation_fields[<?=$user->user_id?>]" 
+                                            class="form-control confirmationFields" 
                                             value="<?=$user->confirmationNumber ?? ''?>"
->
+                                        />
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -468,12 +468,12 @@
                             <input type="hidden" name="airline_name" id="airline_name" value="">
                         </div>
                     </div>
-                    <!-- <div class="row mb-3">
+                    <div class="row mb-3">
                         <label for="confirmation" class="col-sm-2 col-form-label">Confirmation<i class="text-danger">*</i></label>
                         <div class="col-sm-10">
                             <input type="text" name="confirmation" id="confirmation" class="form-control">
                         </div>
-                    </div> -->
+                    </div>
                 <div class="row mb-3" id="confirmation_fields">
                     <?php if(isset($planUsers)): ?>
                         <?php foreach($planUsers as $user): ?>
@@ -482,10 +482,14 @@
                                     Confirmation for <?=$user->fname?> <?=$user->lname?><i class="text-danger">*</i>
                                 </label>
                                 <div class="col-sm-10">
-                                    <input type="text" 
-                                        name="confirmation[<?=$user->user_id?>]" 
-                                        class="form-control" 
-                                        value="<?=$user->confirmation ?? ''?>">
+                                     <div class="col-sm-10">
+                                        <input type="text" 
+                                            id="confirmation_fields<?=$user->user_id?>"
+                                            name="confirmation_fields[<?=$user->user_id?>]" 
+                                            class="form-control confirmationFields" 
+                                            value="<?=$user->confirmationNumber ?? ''?>"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>

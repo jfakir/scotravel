@@ -127,16 +127,14 @@
                         <?php if($isAdmin){?>
                             <i class="bi bi-three-dots-vertical pointer plan3DotsIcon" style="font-size: 25px;" id="dropdownMenuButton<?=$planData['id']?>" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer;"></i>
                         <?php } ?>
-                        <?php foreach ($plans as $plan): ?>
+                        <?php if ($planData['numberOfAttachments'] > 0): ?>
                             <div class="plan-item">
-                                <?php if ($plan['numberOfAttachments'] > 0): ?>
                                     <button class="btn btn-sm  view-attachments-btn" style="font-size: 20px;"
-                                            data-plan-id="<?= $plan['id'] ?>">
+                                            data-plan-id="<?= $planData['id']; ?>">
                                         <i class="fa fa-paperclip"></i> 
                                     </button>
-                                <?php endif; ?>
                             </div>
-                            <?php endforeach; ?>
+                        <?php endif; ?>    
                         <div class="dropdown-menu plan3DotsIcon<?=$planData['id']?>" aria-labelledby="dropdownMenuButton<?=$planData['id']?>">
                             <a class="dropdown-item" href="<?php echo base_url() . 'layovers/manage';?>" title="Edit">
                                 <i class="bi bi-plus-circle" style="color: var(--blue) !important;"></i> Add Layover

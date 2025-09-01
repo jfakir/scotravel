@@ -118,6 +118,7 @@ $routes->post('plan/addAttachment', 'Plans::addAttachment');
 $routes->post('plan/updateAttachment', 'Plans::updateAttachment');
 $routes->get('plan/getAttachments', 'Plans::getAttachments');
 $routes->post('plan/deleteAttachment', 'Plans::deleteAttachment');
+$routes->get('plan/downloadAttachment', 'Plans::downloadAttachment');
 
 
 //notifications  start

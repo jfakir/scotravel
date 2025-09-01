@@ -783,7 +783,10 @@ $(document).ready(function () {
         var $this = $(this);
         $this.prop('disabled', true);
 
-        if($("#flight_travelers_id").val().length==0 || $("#address").val().length==0 || $("#airline_id").val()==-1 || $("#confirmation").val().trim() == '' || $("#flight_number").val().trim() == ''
+        if($("#flight_travelers_id").val().length==0 || $("#address").val().length==0 || $("#airline_id").val()==-1 || $(".traveler-confirmation input").filter(function(){
+    return $(this).val().trim() === '';
+}).length > 0
+ || $("#flight_number").val().trim() == ''
             || $("#starting_date").val().trim() == '' || $("#ending_date").val().trim() == '' || $("#departure_airport_id").val()==-1  || $("#arrival_airport_id").val()==-1 ){
                 $(".flightFormErrorMessage").html('Please fill the required fields');
                 $this.prop('disabled', false);
@@ -840,7 +843,7 @@ $(document).ready(function () {
                             </label>
                             <div class="col-sm-10">
                                 <input type="text" 
-                                    name="confirmation[${traveler.user_id}]" 
+                                    name="confirmation_fields[${traveler.user_id}]" 
                                     class="form-control" 
                                     value="">
                             </div>
@@ -1360,8 +1363,10 @@ $(document).ready(function () {
         type: "GET",
         data: { plan_id: planId },
         success: function(res) {
+            
             let data = res.data; 
             let html = "";
+            console.log(data);
 
             if(data.length > 0){
                 data.forEach(att => {
@@ -1377,19 +1382,25 @@ $(document).ready(function () {
                     // }
                     if (/\.(jpg|jpeg|png|gif)$/i.test(att.extension)) {
                         html += `<div class="mb-3 d-flex align-items-center justify-content-between">
-                        <img src="${fileUrl}" class="img-fluid rounded shadow-sm" style="max-height:150px">
-                         <button class="btn  delete-attachment-btn" style="background:white; color:red; border:none;" data-attachment-id="${att.id}">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                       </div>`;
+                            <a title="Download File" href="${baseURL}plan/downloadAttachment?id=${att.id}&extension=${att.extension}&name=${encodeURIComponent(att.name)}">
+                                ${att.name}
+                            </a>
+                            <img src="${fileUrl}" class="img-fluid rounded shadow-sm" style="max-height:150px">
+                            <button class="btn delete-attachment-btn" style="background:white; color:red; border:none;" data-attachment-id="${att.id}">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>`;
                     } else {
                         html += `<div class="d-flex align-items-center justify-content-between mb-2">
-                       <a href="${fileUrl}" target="_blank">${att.name}</a>
-                       <button class="btn  delete-attachment-btn" style="background:white; color:red; border:none;" data-attachment-id="${att.id}">
-                        <i class="fa fa-trash"></i>
-                       </button>
-                      </div>`;
+                        <a href="${baseURL}plan/downloadAttachment?id=${att.id}&extension=${att.extension}&name=${encodeURIComponent(att.name)}" target="_blank">
+                            ${att.name}
+                        </a>
+                        <button class="btn delete-attachment-btn" style="background:white; color:red; border:none;" data-attachment-id="${att.id}">
+                                <i class="fa fa-trash"></i>
+                        </button>
+                        </div>`;
                     }
+
                 });
             } else {
                 html = "<p>No attachments found.</p>";

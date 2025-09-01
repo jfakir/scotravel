@@ -30,4 +30,10 @@ class PlanAttachmentsModel extends Model
                     ->findAll();
     }
 
+//     public function countAttachmentsByPlanId($planId) {
+//         return $this->where('plan_id', $planId)
+//                     ->where('is_deleted', 0)
+//                     ->countAllResults();
+//    }
+
 }

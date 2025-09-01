@@ -12,224 +12,145 @@ use App\Models\UserConfirmationsModel;
 class Plans extends BaseController
 {
    
-    // public function save()
-    // {
-    //     if ($this->request->isAJAX()) {
-    //         $plansUsersModal = new PlansUsersModal();
-    //         $PlanModel = new PlanModel();
-        
-    //         $postData = $this->request->getPost();
-            
-    //         $trip_id = $postData['trip_id'];
-
-    //         if(isset($postData['starting_date']) && !empty($postData['starting_date'])){
-    //             $startingDate = new \DateTime($postData['starting_date']);
-    //             $postData['starting_date'] = $startingDate->format('Y-m-d');
-    //         }
-
-    //         if(isset($postData['ending_date']) && !empty($postData['ending_date'])){
-    //             $endingDate = new \DateTime($postData['ending_date']);
-    //             $postData['ending_date'] = $endingDate->format('Y-m-d');
-    //         }else{
-    //             $postData['ending_date'] = NULL;
-    //         }
-            
-    //         // Convert starting_time and ending_time to 24-hour format
-    //         if(isset($postData['starting_time']) && !empty($postData['starting_time'])){
-    //             $startingTime = new \DateTime($postData['starting_time']);
-    //             $postData['starting_time'] = $startingTime->format('H:i');
-    //         }else{
-    //             $postData['starting_time'] = NULL;
-    //         }
-            
-    //         if(isset($postData['ending_time']) && !empty($postData['ending_time'])){
-    //             $endingTime = new \DateTime($postData['ending_time']);
-    //             $postData['ending_time'] = $endingTime->format('H:i');
-    //         }else{
-    //             $postData['ending_time'] = NULL;
-    //         }
-            
-            
-
-    //         if(isset($postData['id']) && !empty($postData['id'])){
-
-    //             $planId = $PlanModel->update($postData['id'],$postData);
-
-    //             $plansUsersModal->where('plan_id', $postData['id'])->delete();
-
-    //             if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
-    //                 $travelers_id = $postData['travelers_id'];
-    //                 foreach ($travelers_id as $travelerId) {
-    //                         $data = [
-    //                             'plan_id' => $postData['id'] ,
-    //                             'user_id' => $travelerId
-    //                         ];
-                    
-    //                     $plansUsersModal->insert($data);
-    //                 }
-    //             }
-    //         }else{
-
-    //             $planId = $PlanModel->insert($postData);
-
-    //             if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
-    //                     $travelers_id = $postData['travelers_id'];
-    //                     foreach ($travelers_id as $travelerId) {
-    //                         $data = [
-    //                             'plan_id' => $planId ,
-    //                             'user_id' => $travelerId
-    //                         ];
-                    
-    //                     $plansUsersModal->insert($data);
-    //                 }
-    //             }
-            
-    //         }
-
-    //         if ($planId) {
-    //             return $this->response->setJSON([
-    //                 'status' => true,
-    //                 'trip_id' => base64_encode($trip_id)
-    //             ]);
-    //         } else {
-    //             return $this->response->setJSON([
-    //                 'status' => false,
-    //             ]);
-    //         }
-            
-    //         // $users = $obj['planUsers'];
-    //         // foreach ($users as $user) {
-    //         //         $data = [
-    //         //             'plan_id' => $planId ,
-    //         //             'user_id' => $user['user_id']
-    //         //         ];
-            
-    //         //         $plansUsersModal->insert($data);
-    //         // }
-
-        
-    //     }
-    // }
-
     public function save()
-{
-    if ($this->request->isAJAX()) {
-        $plansUsersModal = new PlansUsersModal();
-        $PlanModel = new PlanModel();
-        $userConfirmationsModel = new UserConfirmationsModel();
+    {
+        if ($this->request->isAJAX()) {
+            $plansUsersModal = new PlansUsersModal();
+            $PlanModel = new PlanModel();
+            $userConfirmationsModel = new UserConfirmationsModel();
 
-        $postData = $this->request->getPost();
-        $trip_id = $postData['trip_id'];
+        
+            $postData = $this->request->getPost();
+            $postData = $this->request->getPost();
 
-        // Date/time formatting (kept as-is)
-        if(isset($postData['starting_date']) && !empty($postData['starting_date'])){
-            $startingDate = new \DateTime($postData['starting_date']);
-            $postData['starting_date'] = $startingDate->format('Y-m-d');
-        }
-        if(isset($postData['ending_date']) && !empty($postData['ending_date'])){
-            $endingDate = new \DateTime($postData['ending_date']);
-            $postData['ending_date'] = $endingDate->format('Y-m-d');
-        } else {
-            $postData['ending_date'] = NULL;
-        }
-        if(isset($postData['starting_time']) && !empty($postData['starting_time'])){
-            $startingTime = new \DateTime($postData['starting_time']);
-            $postData['starting_time'] = $startingTime->format('H:i');
-        } else {
-            $postData['starting_time'] = NULL;
-        }
-        if(isset($postData['ending_time']) && !empty($postData['ending_time'])){
-            $endingTime = new \DateTime($postData['ending_time']);
-            $postData['ending_time'] = $endingTime->format('H:i');
-        } else {
-            $postData['ending_time'] = NULL;
-        }
+            // Debug confirmation fields
+            log_message('debug', 'Confirmation fields: ' . print_r($postData['confirmation_fields'] ?? [], true));
 
-        // PLAN UPDATE / INSERT
-        if(isset($postData['id']) && !empty($postData['id'])){
-            $planId = $postData['id'];
+            
+            $trip_id = $postData['trip_id'];
 
-            $PlanModel->update($planId,$postData);
-
-            // reset plan users
-            $plansUsersModal->where('plan_id', $planId)->delete();
-            if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
-                foreach ($postData['travelers_id'] as $travelerId) {
-                    $plansUsersModal->insert([
-                        'plan_id' => $planId ,
-                        'user_id' => $travelerId
-                    ]);
-                }
+            if(isset($postData['starting_date']) && !empty($postData['starting_date'])){
+                $startingDate = new \DateTime($postData['starting_date']);
+                $postData['starting_date'] = $startingDate->format('Y-m-d');
             }
-        } else {
-            $planId = $PlanModel->insert($postData);
 
-            if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
-                foreach ($postData['travelers_id'] as $travelerId) {
-                    $plansUsersModal->insert([
-                        'plan_id' => $planId ,
-                        'user_id' => $travelerId
-                    ]);
-                }
+            if(isset($postData['ending_date']) && !empty($postData['ending_date'])){
+                $endingDate = new \DateTime($postData['ending_date']);
+                $postData['ending_date'] = $endingDate->format('Y-m-d');
+            }else{
+                $postData['ending_date'] = NULL;
             }
-        }
+            
+            // Convert starting_time and ending_time to 24-hour format
+            if(isset($postData['starting_time']) && !empty($postData['starting_time'])){
+                $startingTime = new \DateTime($postData['starting_time']);
+                $postData['starting_time'] = $startingTime->format('H:i');
+            }else{
+                $postData['starting_time'] = NULL;
+            }
+            
+            if(isset($postData['ending_time']) && !empty($postData['ending_time'])){
+                $endingTime = new \DateTime($postData['ending_time']);
+                $postData['ending_time'] = $endingTime->format('H:i');
+            }else{
+                $postData['ending_time'] = NULL;
+            }
+            
+            
 
-        // CONFIRMATIONS LOGIC
-        if (isset($postData['confirmation']) && !empty($postData['confirmation'])) {
-            $confirmations = $postData['confirmation']; // [userId => confirmationNumber]
+            if(isset($postData['id']) && !empty($postData['id'])){
 
-            //  save all confirmations into plans.confirmation column (JSON encoded)
-            $PlanModel->update($planId, [
-                'confirmation' => json_encode($confirmations)
-            ]);
+                $planId = $PlanModel->update($postData['id'],$postData);
 
-            //  save each user’s confirmation
-            // foreach ($confirmations as $userId => $confirmationNumber) {
-            //     if (!empty($confirmationNumber)) {
-            //         $userConfirmationsModel->save([
-            //             'planId'             => $planId,
-            //             'userId'             => $userId,
-            //             'confirmationNumber' => $confirmationNumber
-            //         ]);
-            //     }
-            // }
+                $plansUsersModal->where('plan_id', $postData['id'])->delete();
 
-            foreach ($confirmations as $userId => $confirmationNumber) {
-                if (!empty($confirmationNumber)) {
-                    $existing = $userConfirmationsModel
-                        ->where('planId', $planId)
-                        ->where('userId', $userId)
-                        ->first();
-
-                    if ($existing) {
-                        // update existing row
-                        $userConfirmationsModel->update($existing['id'], [
-                            'confirmationNumber' => $confirmationNumber
-                        ]);
-                    } else {
-                        // insert new row
-                        $userConfirmationsModel->insert([
-                            'planId' => $planId,
-                            'userId' => $userId,
-                            'confirmationNumber' => $confirmationNumber
-                        ]);
+                if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
+                    $travelers_id = $postData['travelers_id'];
+                    foreach ($travelers_id as $travelerId) {
+                            $data = [
+                                'plan_id' => $postData['id'] ,
+                                'user_id' => $travelerId
+                            ];
+                    
+                        $plansUsersModal->insert($data);
                     }
                 }
+                 $confirmationNumber=$postData['confirmation_fields'];     
+                  foreach ($confirmationNumber as $userId => $confirmationNumber) {
+                    if (!empty($confirmationNumber)) {
+                        $existing = $userConfirmationsModel
+                            ->where('planId', $postData['id'] )
+                            ->where('userId', $userId)
+                            ->first();
+
+                        if ($existing && isset($existing['id'])) {
+                            $userConfirmationsModel->update($existing['id'], [
+                                'confirmationNumber' => $confirmationNumber
+                            ]);
+                        } else {
+                            // insert new row
+                            $userConfirmationsModel->insert([
+                                'planId'             => $postData['id'],
+                                'userId'             => $userId,
+                                'confirmationNumber' => $confirmationNumber
+                            ]);
+                        }
+                    }
+                    
+                }
+
+            }else{
+
+                $planId = $PlanModel->insert($postData);
+                if(isset($postData['travelers_id']) && !empty($postData['travelers_id'])){
+                        $travelers_id = $postData['travelers_id'];
+                        foreach ($travelers_id as $travelerId) {
+                            $data = [
+                                'plan_id' => $planId ,
+                                'user_id' => $travelerId
+                            ];
+                    
+                        $plansUsersModal->insert($data);
+                    }
+                }
+                 if(isset($postData['confirmation_fields']) && !empty($postData['confirmation_fields'])){
+                    foreach($postData['confirmation_fields'] as $userId => $confirmationNumber){
+                        if(!empty($confirmationNumber)){
+                            $userConfirmationsModel->insert([
+                                'planId' => $planId,
+                                'userId' => $userId,
+                                'confirmationNumber' => $confirmationNumber
+                            ]);
+                        }
+                    }
+                } 
+            
             }
 
-        }
+            if ($planId) {
+                return $this->response->setJSON([
+                    'status' => true,
+                    'trip_id' => base64_encode($trip_id)
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'status' => false,
+                ]);
+            }
+            
+            // $users = $obj['planUsers'];
+            // foreach ($users as $user) {
+            //         $data = [
+            //             'plan_id' => $planId ,
+            //             'user_id' => $user['user_id']
+            //         ];
+            
+            //         $plansUsersModal->insert($data);
+            // }
 
-        // RESPONSE
-        if ($planId) {
-            return $this->response->setJSON([
-                'status' => true,
-                'trip_id' => base64_encode($trip_id)
-            ]);
-        } else {
-            return $this->response->setJSON(['status' => false]);
+        
         }
     }
-}
 
 
     public function edit()
@@ -409,6 +330,63 @@ class Plans extends BaseController
     }
 }
 
+//     public function addAttachment(){
+//     $planAttachmentsModel = new PlanAttachmentsModel();
+//     $attachmentId = null;
+
+//     // Get plan ID (works for both web & mobile)
+//     $planId = $this->request->getPost('id') ?? $this->request->getPost('planId');
+
+//     if (!$planId) {
+//         return $this->response->setJSON([
+//             'status' => false,
+//             'message' => 'planId is required'
+//         ]);
+//     }
+
+//     // Handle uploaded file (works for both cases)
+//     $file = $this->request->getFile('planAttachment') ?? $this->request->getFile('file');
+
+//     if ($file && $file->isValid() && !$file->hasMoved()) {
+//         $ext = $file->getClientExtension();
+//         $name = $file->getClientName();
+
+//         $allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
+//         if (!in_array($ext, $allowedExtensions)) {
+//             return $this->response->setJSON([
+//                 'status' => false,
+//                 'message' => 'Invalid file type'
+//             ]);
+//         }
+
+//         // Insert record in DB
+//         $data = [
+//             'plan_id'   => $planId,
+//             'name'      => $name,
+//             'extension' => $ext,
+//             'is_deleted'=> 0, // keep as active
+//         ];
+//         $attachmentId = $planAttachmentsModel->insert($data);
+
+//         if ($attachmentId) {
+//             // Move uploaded file (use one consistent folder)
+//             $file->move(FCPATH . '../public/assets/plan_attachments', $attachmentId . '.' . $ext);
+
+//             return $this->response->setJSON([
+//                 'status' => true,
+//                 'message'=> 'File uploaded successfully',
+//                 'id'     => $attachmentId,
+//                 'name'   => $name,
+//                 'plan_id'=> $planId
+//             ]);
+//         }
+//     }
+
+//     return $this->response->setJSON([
+//         'status' => false,
+//         'message'=> 'Upload failed'
+//     ]);
+// }
 
 
      public function updateAttachment(){
@@ -439,14 +417,59 @@ class Plans extends BaseController
 
     public function getAttachments(){
         $planId = $this->request->getGet('plan_id'); 
-        $planAttachmentsModel = new PlanAttachmentsModel();
-        $attachments = $planAttachmentsModel->getAttachmentsByPlanId($planId);
+        // $attachments = $planAttachmentsModel->getAttachmentsByPlanId($planId);
+
+         $planAttachmentsModel = new PlanAttachmentsModel();
+
+  
+        
+        $attachments = $planAttachmentsModel->select('*')
+                                        ->where('is_deleted', 0)
+                                        ->where('plan_id', $planId)
+                                        ->findAll();
+                                        
 
         return $this->response->setJSON([
             'status' => true,
             'data'   => $attachments
         ]);
   }
+
+// public function getAttachments()
+// {
+//     $planId = null;
+
+//     // Try GET first
+//     if ($this->request->getGet('plan_id')) {
+//         $planId = $this->request->getGet('plan_id');
+//     } else {
+//         // Fallback: Try JSON body (for mobile)
+//         $json = file_get_contents('php://input');
+//         if (!empty($json)) {
+//             $obj = json_decode($json, true);
+//             $planId = $obj['id'] ?? null;
+//         }
+//     }
+
+//     if (!$planId) {
+//         return $this->response->setJSON([
+//             'status' => false,
+//             'message' => 'plan_id is required'
+//         ]);
+//     }
+
+//     $planAttachmentsModel = new PlanAttachmentsModel();
+//     $attachments = $planAttachmentsModel
+//                         ->where('plan_id', $planId)
+//                         ->where('is_deleted', 0)
+//                         ->findAll();
+
+//     return $this->response->setJSON([
+//         'status' => true,
+//         'data'   => $attachments
+//     ]);
+// }
+
 
 
   public function deleteAttachment(){
@@ -467,5 +490,60 @@ class Plans extends BaseController
 
     return $this->response->setJSON(['status' => false]);
  }
+
+    // public function downloadAttachment()
+    // {
+    //     $id = $this->request->getGet('id');
+    //     $extension = $this->request->getGet('extension');
+    //     $name = $this->request->getGet('name');
+
+        
+
+    //     $filePath = FCPATH . 'assets\plan_attachments\\' . $id . '.' . $extension;
+
+    //     // Debugging: print file path
+    //     echo "File Path: " . $filePath . "<br>";
+
+    //     if (file_exists($filePath)) {
+    //         echo "File exists.<br>";
+
+    //         // Clean the output buffer
+    //         ob_clean();
+    //         flush();
+
+    //         // Set headers for download
+    //         header('Content-Description: File Transfer');
+    //         header('Content-Type: application/octet-stream');
+    //         header('Content-Disposition: attachment; filename="' . $name.'.'.$extension);
+    //         header('Content-Transfer-Encoding: binary');
+    //         header('Expires: 0');
+    //         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    //         header('Pragma: public');
+    //         header('Content-Length: ' . filesize($filePath));
+
+    //         // Read the file and output its contents
+    //         readfile($filePath);
+    //         exit();
+    //     } else {
+    //         echo "File does not exist.<br>";
+    //     }
+    // }
+
+    public function downloadAttachment(){
+        $id = $this->request->getGet('id');
+        $extension = $this->request->getGet('extension');
+        $name = $this->request->getGet('name');
+
+        $filePath = FCPATH . "assets/plan_attachments/" . $id . "." . $extension;
+
+        if (file_exists($filePath)) {
+            return $this->response->download($filePath, null)
+                                ->setFileName($name);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+
 
 }
