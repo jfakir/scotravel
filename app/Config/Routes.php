@@ -214,5 +214,3 @@ $routes->post('mobile/updateNotification', 'Mobile::updateNotification');
 $routes->post('mobile/deleteNotification', 'Mobile::deleteNotification');
 
 
-// Test
-$routes->get('test', 'Test::test');
